@@ -1,3 +1,5 @@
+use std::{result, vec};
+
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
@@ -19,7 +21,29 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    
+    let mut numbers: Vec<i32> = vec![];
+
+    let mut threesum: Vec<i32> = vec![];
+
+    
+    for line in input.lines() {
+        numbers.push(line.parse().unwrap());
+    }
+
+    for i in 0..numbers.len()-1 {
+        let a = numbers[i];
+        let b = numbers[i+1];
+        let c = numbers[i+2];
+
+        threesum.push(a+b+c);
+
+        }
+
+        let result = threesum.iter().map(|n| n.to_string()).collect::<Vec<String>>().join("\n");
+        let results = result.as_str();
+        return part_one(results);
+    
 }
 
 #[cfg(test)]
