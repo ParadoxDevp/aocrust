@@ -1,7 +1,29 @@
 advent_of_code::solution!(2);
 
 pub fn part_one(input: &str) -> Option<u32> {
-    None
+
+    let result: Vec<(&str, u32)> = input.lines().map(|l| l.split_whitespace()).map(|l|{
+        let direction = l.to_owned().next().unwrap();
+        let amount = l.to_owned().next().unwrap().parse::<u32>().expect("g");
+        (direction, amount)
+
+    }).collect();
+
+    let mut depth = 0;
+    let mut forward = 0;
+
+    for res in result{
+        match res.0 {
+            "forward" => forward+=res.1,
+            "down" => depth+=res.1,
+            "up" => depth+=res.1,
+            _ => depth= depth,
+        
+        }
+
+    }
+   
+    Some(depth*forward)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
