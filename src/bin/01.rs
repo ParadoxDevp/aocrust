@@ -31,7 +31,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         numbers.push(line.parse().unwrap());
     }
 
-    for i in 0..numbers.len()-1 {
+    for i in 0..numbers.len()-2 {
         let a = numbers[i];
         let b = numbers[i+1];
         let c = numbers[i+2];
