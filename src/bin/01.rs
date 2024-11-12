@@ -3,12 +3,9 @@ use std::{result, vec};
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut numbers: Vec<i32> = vec![];
+    
     let mut count = 0;
-
-    for line in input.lines() {
-        numbers.push(line.parse().unwrap());
-    }
+    let numbers: Vec<u32> = input.lines().map(|l| l.parse::<u32>().unwrap()).collect();
 
     for i in 0..numbers.len()-1 {
         let a = numbers[i];
@@ -53,12 +50,12 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(7));
     }
 
     #[test]
     fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        let result: Option<u32> = part_two(&advent_of_code::template::read_file("examples", DAY));
+        assert_eq!(result, Some(5));
     }
 }
