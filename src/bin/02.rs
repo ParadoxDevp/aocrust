@@ -2,9 +2,10 @@ advent_of_code::solution!(2);
 
 pub fn part_one(input: &str) -> Option<u32> {
 
-    let result: Vec<(&str, u32)> = input.lines().map(|l| l.split_whitespace()).map(|l|{
-        let direction = l.to_owned().next().unwrap();
-        let amount = l.to_owned().next().unwrap().parse::<u32>().expect("g");
+    let result: Vec<(&str, u32)> = input.lines().map(|l| {
+        let mut l = l.split_whitespace();
+        let direction = l.next().unwrap();
+        let amount = l.next().unwrap().parse::<u32>().expect("g");
         (direction, amount)
 
     }).collect();
