@@ -17,7 +17,7 @@ pub fn part_one(input: &str) -> Option<u32> {
         match res.0 {
             "forward" => forward+=res.1,
             "down" => depth+=res.1,
-            "up" => depth+=res.1,
+            "up" => depth-=res.1,
             _ => depth= depth,
         
         }
