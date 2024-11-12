@@ -6,41 +6,35 @@ pub fn part_one(input: &str) -> Option<u32> {
     
     let mut count = 0;
     let numbers: Vec<u32> = input.lines().map(|l| l.parse::<u32>().unwrap()).collect();
+    let mut a = 0;
 
-    for i in 0..numbers.len()-1 {
-        let a = numbers[i];
-        let b = numbers[i+1];
-        if b>a {
+    for b in numbers {
+        if b>a && a != 0{
             count+=1;
         }
+        a = b;
     }
     Some(count)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    
-    let mut numbers: Vec<i32> = vec![];
 
-    let mut threesum: Vec<i32> = vec![];
-
+    let mut count = 0;
     
-    for line in input.lines() {
-        numbers.push(line.parse().unwrap());
+    let numbers: Vec<u32> = input.lines().map(|l| l.parse::<u32>().unwrap()).collect();
+
+    let threesum: Vec<u32> = numbers.windows(3).map(|window| window.iter().sum()).collect();
+
+    let mut a = 0;
+
+    for b in threesum {
+        if b>a && a != 0{
+            count+=1;
+        }
+        a = b;
     }
 
-    for i in 0..numbers.len()-2 {
-        let a = numbers[i];
-        let b = numbers[i+1];
-        let c = numbers[i+2];
-
-        threesum.push(a+b+c);
-
-        }
-
-        let result = threesum.iter().map(|n| n.to_string()).collect::<Vec<String>>().join("\n");
-        let results = result.as_str();
-        return part_one(results);
-    
+    Some(count)
 }
 
 #[cfg(test)]
