@@ -6,14 +6,15 @@ advent_of_code::solution!(3);
 pub fn part_one(input: &str) -> Option<u32> {
     
     let numbers: Vec<u64> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
-
-    let length = numbers[0].count_ones() + numbers[0].count_zeros();
+    let length = 12;
+    // let length = numbers[0].count_ones() + numbers[0].count_zeros();
+    println!("{}", 12);
 
     let mut num = vec![0; length.try_into().unwrap()];
 
         for n in 0..length{
-            let mut zeroes: u8 = 0;
-            let mut ones: u8 = 0;
+            let mut zeroes: u32 = 0;
+            let mut ones: u32 = 0;
 
             for number in &numbers {
 
@@ -32,12 +33,19 @@ pub fn part_one(input: &str) -> Option<u32> {
 
             }
 
+        }
+        let gammabin = num.iter().map(|digit| digit.to_string()).collect::<String>();
+        let gammabin = &gammabin;
+        let gamma = u32::from_str_radix(gammabin, 2).unwrap();
+        let epsilonbin = gammabin.chars()
+        .map(|ch| if ch == '1' { '0' } else { '1' })
+        .collect::<String>();
+        let epsilonbin = &epsilonbin;
+        let epsilon = u32::from_str_radix(epsilonbin, 2).unwrap();
 
+        let power = gamma*epsilon;
 
-
-    }
-    
-None
+    Some(power)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
