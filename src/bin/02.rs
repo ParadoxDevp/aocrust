@@ -3,9 +3,9 @@ advent_of_code::solution!(2);
 pub fn part_one(input: &str) -> Option<u32> {
 
     let result: Vec<(&str, u32)> = input.lines().map(|l| {
-        let l:Vec<&str> = l.split_whitespace().collect();
-        let direction = l[0];
-        let amount = l[1].parse().unwrap();
+        let l = l.split_once(' ').unwrap();
+        let direction = l.0;
+        let amount = l.1.parse().unwrap();
         (direction, amount)
 
     }).collect();
@@ -30,9 +30,9 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let result: Vec<(&str, u32)> = input.lines().map(|l| {
-        let l:Vec<&str> = l.split_whitespace().collect();
-        let direction = l[0];
-        let amount = l[1].parse().unwrap();
+        let l = l.split_once(' ').unwrap();
+        let direction = l.0;
+        let amount = l.1.parse().unwrap();
         (direction, amount)
 
     }).collect();
