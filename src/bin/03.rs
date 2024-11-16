@@ -51,7 +51,109 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let mut length: usize = 0;
+
+    let mut numbers: Vec<String> = input.lines().map(|l| {
+    length = l.chars().count();
+        l.to_string()}).collect();
+
+        let mut numbers2: Vec<String> = input.lines().map(|l| l.to_string()).collect();
+
+
+        for n in 0..length {
+            let mut zeroes = 0;
+            let mut ones = 0;
+        
+
+            for number in &numbers {
+
+                if number.chars().nth(n).unwrap() == '0' {
+                    zeroes += 1;
+                }else {
+                    ones += 1;
+                }
+
+            }
+            if zeroes>ones {                
+                numbers.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '0' {
+                        
+                        true 
+                    } else {
+                        
+                        false 
+                    }
+                });
+
+                numbers2.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '1' {
+                        
+                        true 
+                    } else {
+                        
+                        false 
+                    }
+                });
+
+                
+                
+            }else if ones>zeroes{
+                numbers.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '1' {
+                        
+                        true 
+                    } else {
+                        
+                        false // This will keep the number in the vector
+                    }
+                }); 
+                numbers2.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '0' {
+                        
+                        true 
+                    } else {
+                        
+                        false 
+                    }
+                });
+                 
+            }else if zeroes == ones {
+                numbers.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '1' {
+                        
+                        true 
+                    } else {
+                        
+                        false 
+                    }
+                });
+                numbers2.retain(|number| {
+                    if number.chars().nth(n).unwrap() == '0' {
+                        
+                        true 
+                    } else {
+                        
+                        false 
+                    }
+                });
+            }
+        }
+
+
+        for number in &numbers {
+
+           println!("{}", number);
+
+        }
+        for number in &numbers2 {
+
+            println!("{}", number);
+ 
+        }
+
+        
+
+       None
 }
 
 #[cfg(test)]
