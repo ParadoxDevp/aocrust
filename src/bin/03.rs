@@ -1,8 +1,3 @@
-use core::num;
-use std::{io::BufRead, vec};
-
-use tinyjson::stringify;
-
 advent_of_code::solution!(3);
 
 pub fn part_one(input: &str) -> Option<u32> {
@@ -58,9 +53,10 @@ pub fn part_two(input: &str) -> Option<u32> {
         l.to_string()}).collect();
 
         let mut numbers2: Vec<String> = input.lines().map(|l| l.to_string()).collect();
+        dbg!(length);
 
 
-        for n in 0..length {
+        for n in 0..length{
             let mut zeroes = 0;
             let mut ones = 0;
         
@@ -74,82 +70,87 @@ pub fn part_two(input: &str) -> Option<u32> {
                 }
 
             }
-            if zeroes>ones {                
-                numbers.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '0' {
-                        
-                        true 
-                    } else {
-                        
-                        false 
-                    }
-                });
+            
+            
+            if numbers.len() != 1 {
+                if zeroes>ones {                
+                    numbers.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '0' {
+                            
+                            true 
+                        } else {
+                            
+                            false 
+                        }
+                    });
+                    
+                }else if ones>zeroes{
+                    numbers.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '1' {
+                            
+                            true 
+                        }else {
+                            
+                            false 
+                        }
+                    }); 
 
-                numbers2.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '1' {
-                        
-                        true 
-                    } else {
-                        
-                        false 
-                    }
-                });
+                }else if zeroes == ones {
+                    numbers.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '1' {
+                            
+                            true 
+                        }else {
+                            
+                            false 
+                        }
+                    });
+                
+                }
+            }
 
-                
-                
-            }else if ones>zeroes{
-                numbers.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '1' {
-                        
-                        true 
-                    } else {
-                        
-                        false // This will keep the number in the vector
-                    }
-                }); 
-                numbers2.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '0' {
-                        
-                        true 
-                    } else {
-                        
-                        false 
-                    }
-                });
-                 
-            }else if zeroes == ones {
-                numbers.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '1' {
-                        
-                        true 
-                    } else {
-                        
-                        false 
-                    }
-                });
-                numbers2.retain(|number| {
-                    if number.chars().nth(n).unwrap() == '0' {
-                        
-                        true 
-                    } else {
-                        
-                        false 
-                    }
-                });
+
+            if numbers2.len() !=1 {
+                if zeroes<ones {    
+                    numbers2.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '0' {
+                            
+                            true 
+                        } else {
+                            
+                            false 
+                        }
+                    });
+                    
+                }else if ones<zeroes{
+                    
+                    numbers2.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '1' {
+                            println!("keep {} {}",n , number);
+                            true 
+                        }else {
+                            println!("drop {} {}",n ,number);
+     
+                            false 
+                    }});
+                     
+                }else if zeroes == ones {
+                    
+                    numbers2.retain(|number| {
+                        if number.chars().nth(n).unwrap() == '0' {
+    
+                            true 
+                        } else {
+                            false 
+                        }
+                    });
+                }
             }
         }
 
 
-        for number in &numbers {
-
-           println!("{}", number);
-
-        }
-        for number in &numbers2 {
-
-            println!("{}", number);
- 
-        }
+        dbg!(&numbers);
+        dbg!(&numbers2);
 
         
 
@@ -163,12 +164,14 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
+        assert_eq!(result, Some(198));
         
     }
 
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
+        assert_eq!(result, Some(230));
         
     }
 }
