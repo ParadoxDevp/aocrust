@@ -111,7 +111,10 @@ pub fn part_two(input: &str) -> Option<u32> {
 
 
             if numbers2.len() !=1 {
-                if zeroes<ones {    
+                if zeroes == 0 || ones == 0 {    
+                    numbers2.retain(|_| true);
+                    
+                }else if zeroes<ones {    
                     numbers2.retain(|number| {
                         if number.chars().nth(n).unwrap() == '0' {
                             
