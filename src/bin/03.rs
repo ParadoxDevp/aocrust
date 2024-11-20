@@ -61,11 +61,22 @@ pub fn part_two(input: &str) -> Option<u32> {
         let mut zeroes = 0;
         let mut ones = 0;
 
+        let mut zeroes2 = 0;
+        let mut ones2 = 0;
+
         for number in &numbers {
             if number.chars().nth(n).unwrap() == '0' {
                 zeroes += 1;
             } else {
                 ones += 1;
+            }
+        }
+
+        for number in &numbers2 {
+            if number.chars().nth(n).unwrap() == '0' {
+                zeroes2 += 1;
+            } else {
+                ones2 += 1;
             }
         }
 
@@ -98,9 +109,9 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
 
         if numbers2.len() != 1 {
-            if zeroes == 0 || ones == 0 {
+            if zeroes2 == 0 || ones2 == 0 {
                 numbers2.retain(|_| true);
-            } else if zeroes < ones {
+            } else if zeroes2 < ones2 {
                 numbers2.retain(|number| {
                     if number.chars().nth(n).unwrap() == '0' {
                         true
@@ -108,7 +119,7 @@ pub fn part_two(input: &str) -> Option<u32> {
                         false
                     }
                 });
-            } else if ones < zeroes {
+            } else if ones2 < zeroes2 {
                 numbers2.retain(|number| {
                     if number.chars().nth(n).unwrap() == '1' {
                         println!("keep {} {}", n, number);
@@ -119,7 +130,7 @@ pub fn part_two(input: &str) -> Option<u32> {
                         false
                     }
                 });
-            } else if zeroes == ones {
+            } else if zeroes2 == ones2 {
                 numbers2.retain(|number| {
                     if number.chars().nth(n).unwrap() == '0' {
                         true
